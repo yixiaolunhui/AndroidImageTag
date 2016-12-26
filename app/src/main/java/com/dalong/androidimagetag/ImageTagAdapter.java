@@ -1,12 +1,18 @@
 package com.dalong.androidimagetag;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.dalong.androidimagetag.view.LinearLayoutTarget;
 
 import java.util.List;
@@ -52,9 +58,9 @@ public class ImageTagAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        /**
-         * 第一种
-         */
+//        /**
+//         * 第一种
+//         */
 //        Glide.with(mContext)
 //                .load(list.get(position).getImageUrl())
 //                .asBitmap().placeholder(R.drawable.test)
@@ -62,7 +68,12 @@ public class ImageTagAdapter extends BaseAdapter {
 //            @Override
 //            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
 //                Drawable drawable =new BitmapDrawable(resource);
-//                holder.imageTagLayout.setBackground(drawable);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                    holder.imageTagLayout.setBackground(drawable);
+//                }else{
+//                    holder.imageTagLayout.setBackgroundDrawable(drawable);
+//                }
+//
 //            }
 //        });
 
