@@ -1,7 +1,9 @@
 package com.dalong.androidimagetag.view;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
@@ -33,7 +35,11 @@ public abstract class ViewGroupTarget<Z> extends ViewTarget<ViewGroup, Z> implem
      */
     @Override
     public void setDrawable(Drawable drawable) {
-        view.setBackground(drawable);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(drawable);
+        }else{
+            view.setBackgroundDrawable(drawable);
+        }
     }
 
     /**
@@ -44,18 +50,27 @@ public abstract class ViewGroupTarget<Z> extends ViewTarget<ViewGroup, Z> implem
      */
     @Override
     public void onLoadStarted(Drawable placeholder) {
-        view.setBackground(placeholder);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(placeholder);
+        }else{
+            view.setBackgroundDrawable(placeholder);
+        }
     }
 
     /**
-     * Sets the given {@link android.graphics.drawable.Drawable} on the view using
-     * {@link android.widget.ImageView#setImageDrawable(android.graphics.drawable.Drawable)}.
+     * Sets the given {@link Drawable} on the view using
+     * {@link ImageView#setImageDrawable(Drawable)}.
      *
      * @param errorDrawable {@inheritDoc}
      */
     @Override
     public void onLoadFailed(Exception e, Drawable errorDrawable) {
-        view.setBackground(errorDrawable);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(errorDrawable);
+        }else{
+            view.setBackgroundDrawable(errorDrawable);
+        }
+
     }
 
     /**
@@ -66,7 +81,11 @@ public abstract class ViewGroupTarget<Z> extends ViewTarget<ViewGroup, Z> implem
      */
     @Override
     public void onLoadCleared(Drawable placeholder) {
-        view.setBackground(placeholder);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(placeholder);
+        }else{
+            view.setBackgroundDrawable(placeholder);
+        }
     }
 
     @Override

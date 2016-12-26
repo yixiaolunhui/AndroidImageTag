@@ -3,6 +3,7 @@ package com.dalong.androidimagetag.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.view.ViewGroup;
 
 /**
@@ -27,6 +28,11 @@ public class LinearLayoutTarget extends ViewGroupTarget<Bitmap> {
      */
     @Override
     protected void setResource(Bitmap resource) {
-        view.setBackground(new BitmapDrawable(context.getResources(), resource));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(new BitmapDrawable(context.getResources(), resource));
+        }else{
+            view.setBackgroundDrawable(new BitmapDrawable(context.getResources(), resource));
+        }
+
     }
 }
